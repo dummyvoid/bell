@@ -1,1 +1,33 @@
-# bell\n\nA minimal Windows CLI sound player written in Rust.\n\nIt can be appended to other commands to play a notification sound when the preceding command finishes.\n\n## Usage\n\nWithout arguments, `bell.exe` plays the built-in `Aria_task_finished.wav`:\n\n    bell.exe\n\nTo play a specified WAV file:\n\n    bell.exe "C:\\path\\to\\sound.wav"\n\nThe program waits until playback finishes before exiting.\n\n## Features\n\n- Native Windows CLI application\n- Written in Rust\n- No additional runtime required\n\n## Build\n\nRust toolchain is required.\n\n    cargo build --release\n\n## License\n\nSee [LICENSE](LICENSE).\n
+# bell
+
+A minimal Windows CLI sound player written in Rust.
+
+It can be appended to other commands to play a notification sound when the preceding command finishes.
+
+## Usage
+
+Without arguments, `bell.exe` plays the built-in `Aria_task_finished.wav`:
+
+    bell.exe
+
+To play a specified WAV file:
+
+    bell.exe "C:\path\to\sound.wav"
+
+The program waits until playback finishes before exiting.
+
+## Features
+
+- Native Windows CLI application
+- Written in Rust
+- No additional runtime required
+
+## Build
+
+Rust toolchain is required.
+
+    cargo build --release
+
+## License
+
+See [LICENSE](LICENSE).
