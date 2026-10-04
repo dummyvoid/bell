@@ -38,6 +38,8 @@ cargo build --release
 
 請參閱[LICENSE](LICENSE)。
 
+---
+
 # bell
 
 A minimal Windows CLI sound player written in Rust.
