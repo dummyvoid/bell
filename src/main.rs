@@ -1,5 +1,5 @@
 use std::{env, ffi::OsStr, os::windows::ffi::OsStrExt, path::Path};
-use windows_sys::Win32::Media::Audio::{PlaySoundW, SND_ASYNC, SND_FILENAME, SND_MEMORY, SND_SYNC};
+use windows_sys::Win32::Media::Audio::{PlaySoundW, SND_FILENAME, SND_MEMORY, SND_SYNC};
 
 static DEFAULT_SOUND: &[u8] = include_bytes!("../Aria_task_finished.wav");
 
@@ -14,8 +14,7 @@ fn main() {
     unsafe {
         match args.next() {
             Some(path) => {
-                let path = Path::new(&path);
-                let wide_path = wide(path.as_os_str());
+                let wide_path = wide(Path::new(&path).as_os_str());
                 if PlaySoundW(wide_path.as_ptr(), 0, SND_FILENAME | SND_SYNC) == 0 {
                     std::process::exit(1);
                 }
