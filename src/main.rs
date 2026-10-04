@@ -15,12 +15,12 @@ fn main() {
         match args.next() {
             Some(path) => {
                 let wide_path = wide(Path::new(&path).as_os_str());
-                if PlaySoundW(wide_path.as_ptr(), 0, SND_FILENAME | SND_SYNC) == 0 {
+                if PlaySoundW(wide_path.as_ptr(), std::ptr::null_mut(), SND_FILENAME | SND_SYNC) == 0 {
                     std::process::exit(1);
                 }
             }
             None => {
-                if PlaySoundW(DEFAULT_SOUND.as_ptr(), 0, SND_MEMORY | SND_SYNC) == 0 {
+                if PlaySoundW(DEFAULT_SOUND.as_ptr().cast(), std::ptr::null_mut(), SND_MEMORY | SND_SYNC) == 0 {
                     std::process::exit(1);
                 }
             }
