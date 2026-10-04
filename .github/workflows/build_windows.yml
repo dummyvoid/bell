@@ -26,9 +26,21 @@ jobs:
           name: bell-windows-x64
           path: target/x86_64-pc-windows-msvc/release/bell.exe
 
-      - name: Create GitHub Release
+      - name: Create or update GitHub Release
         if: startsWith(github.ref, 'refs/tags/')
         env:
           GH_TOKEN: ${{ github.token }}
+          TAG_NAME: ${{ github.ref_name }}
+        shell: pwsh
         run: |
-          gh release create "${{ github.ref_name }}" "target/x86_64-pc-windows-msvc/release/bell.exe" --title "${{ github.ref_name }}" --generate-notes
+          $ErrorActionPreference = 'Stop'
+          $asset = 'target/x86_64-pc-windows-msvc/release/bell.exe'
+
+          gh release view $env:TAG_NAME 2>$null
+          if ($LASTEXITCODE -eq 0) {
+            Write-Host "Release $env:TAG_NAME already exists. Updating bell.exe..."
+            gh release upload $env:TAG_NAME $asset --clobber
+          } else {
+            Write-Host "Creating release $env:TAG_NAME..."
+            gh release create $env:TAG_NAME $asset --title $env:TAG_NAME --generate-notes
+          }
